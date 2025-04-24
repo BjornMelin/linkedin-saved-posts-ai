@@ -1,0 +1,28 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+description: Core project context & architecture
+globs: \*
+
+# Project Overview
+
+## Purpose
+
+Organise and search LinkedIn Saved Posts for a single user by scraping, classifying and storing them in Supabase.
+
+## Architecture
+
+- **Edge Function** `/api/syncSavedPosts` (cron @ 04:00 UTC)
+- **Playwright MCP** driver for headless LinkedIn scroll
+- Supabase Postgres with `pgvector`
+- Next.js UI with Tailwind/shadcn
+- OpenRouter-powered chat assistant
+- MCP servers available: playwright, firecrawl, tavily, sequential-thinking, memory, git, github.
+
+## Constraints
+
+- Single-user (no RLS yet)
+- Must keep daily OpenAI cost ≤ $0.05
+- SOLID/KISS/DRY/YAGNI design; files ≤ 300 LOC

@@ -1,0 +1,22 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+description: Edge Functions & Agent logic
+globs: src/pages/api/**/\*.ts,src/app/api/**/\*.ts
+
+# Edge Function Rules
+
+## /api/syncSavedPosts
+
+- Launch **playwright MCP**.
+- Scroll until a duplicate `post_id` is found, then abort.
+- Upsert rows: `supabase.from('linkedin_posts').upsert(batch,{onConflict:'post_id'})`
+- Classify new rows with `GPT-4.1-nano` via OpenRouter.
+- Respect 2 requests/sec throttle to avoid LinkedIn detection.
+
+## Model Routing
+
+ALLOWED_MODELS = ['o4-mini-high','o4-mini','gpt-4.1','gemini-2.5-flash-preview'].
+Reject anything else with 400.
