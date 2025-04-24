@@ -1,0 +1,13 @@
+{
+    "cron": [
+        {
+            "path": "/api/syncSavedPosts",
+            "schedule": "0 4 * * *"
+        }
+    ],
+    "functions": {
+        "api/**.ts": {
+            "runtime": "edge"
+        }
+    }
+}
